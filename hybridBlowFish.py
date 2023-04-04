@@ -1,7 +1,8 @@
 # pip install pycryptodome
 # pip install opencv-python
 import os
-from blowFish import *
+from blowFish import BlowFish
+from image_tools import *
 
 
 def get_xor(byte_str1, byte_str2):
@@ -23,20 +24,17 @@ if __name__ == '__main__':
     randValue = np.random.bytes(byte_size)
     message = get_xor(image_byte, randValue)
 
+    bl = BlowFish()
     display_image(message, 'This is the randomized image')
-    # Generate a new initialization vector (IV)
-    iv = get_random_bytes(Blowfish.block_size)
 
     # Create a Blowfish cipher object and encrypt the message
-    cipher = Blowfish.new(key, Blowfish.MODE_CBC, iv)
-    ciphertext = cipher.encrypt(pad(message, Blowfish.block_size))
+    ciphertext = bl.encrypt(message=message, key=key)
     # display the encrypted image if its corrupted print random one
-    print(ciphertext)
     display_image(ciphertext, 'This is the encrypted randomized image')
+    print(ciphertext)
 
     # Now decrypt the image and print the decrypted one
-    cipher = Blowfish.new(key, Blowfish.MODE_CBC, iv)
-    plaintext = unpad(cipher.decrypt(ciphertext), Blowfish.block_size)
+    plaintext = bl.decrypt(ciphertext=ciphertext, key=key)
     # display the decrypted image before removing the random value
     display_image(plaintext, 'This is the decrypted randomized image')
     # display the image after removing the random value
