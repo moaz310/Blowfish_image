@@ -4,13 +4,12 @@
 from image_tools import *
 from Crypto.Cipher import Blowfish
 from Crypto.Util.Padding import pad, unpad
-from Crypto.Random import get_random_bytes
-
 
 class BlowFish:
     def __init__(self):
         with open('iv.txt', 'rb') as fd:
             self.iv = fd.readline()
+
     def encrypt(self, message, key):
         # Create a Blowfish cipher object and encrypt the message
         cipher = Blowfish.new(key, Blowfish.MODE_CBC, self.iv)

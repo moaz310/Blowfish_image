@@ -39,10 +39,12 @@ def display_image(image_bytes, name):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-def write_to_dir(dir, image):
-    with open(dir + '.jpg', 'wb') as f:
+
+def write_to_dir(directory, image):
+    with open(directory + '.jpg', 'wb') as f:
         f.write(image)
 
-def imge_list(path):
-    imgs = [get_image_bytes(path+str(x)+'.jpg') for x in range(0, 100)]
-    return imgs
+
+def image_list(path):
+    images = [get_image_bytes(path+str(x)+'.jpg') for x in range(0, 100)]
+    return images

@@ -13,7 +13,7 @@ import os
 #     os.rename("image_data/" + filename, "image_data/" + str(i) + ".jpg")
 
 if __name__ == '__main__':
-    imgs = imge_list('image_data/')
+    imgs = image_list('image_data/')
     bl = blowFish.BlowFish()
     key = b'Sixteen byte key'
     # i = 0
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     #     write_to_dir('image_encrypted_blow/'+str(i), bl.encrypt(x, key))
     #     i += 1
     true_encrypted_list = [bl.encrypt(x, key) for x in imgs]
-    encrypted_list = imge_list('image_encrypted_blow/')
+    encrypted_list = image_list('image_encrypted_blow/')
     mono_test_data = []
     serial_test_data = []
     for x in encrypted_list:
